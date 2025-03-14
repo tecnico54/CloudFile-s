@@ -1,0 +1,45 @@
+/*Cuepo:*/
+body{
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+/*Contenedor*/
+.Contenedor{
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+   	border: 5px inset; #ccc;
+    border-radius: 10px;
+    background: #f9f9f9;
+}
+/*Titulo 1*/
+.Contenedor__Titulo-1{
+	text-align: center;
+	color: #26e;
+}
+/*Subir Trabajo 1*/
+.Contenedor__Subir-1{
+    display: block;
+    margin: 10px auto;
+}
+/*Subir Trabajo 2*/
+.Contenedor__Subir-2{
+	display: block;
+    margin: 10px auto;
+}
+.Contenedor__Subir-3{
+    display: block;
+    margin: 10px auto;
+}
+/*Titulo 2*/
+.Contenedor__Titulo-2{
+    margin-top: 45px;
+	text-align: center;
+	color: rgb(0, 150, 0);
+}
+/*Descargar*/
+.Descargar{
+    padding: 10px 20px;
+    margin: 5px 7px;
+    cursor: pointer;
+}
