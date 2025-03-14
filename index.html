@@ -26,5 +26,28 @@
                 <button id="btnDescargar-3" class="Descargar">Descarga 3</button>
             </div>
         <script src="JavaScript/Nube.js"></script>
+        <script type="module">
+          // Import the functions you need from the SDKs you need
+          import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
+          import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-analytics.js";
+          // TODO: Add SDKs for Firebase products that you want to use
+          // https://firebase.google.com/docs/web/setup#available-libraries
+        
+          // Your web app's Firebase configuration
+          // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+          const firebaseConfig = {
+            apiKey: "AIzaSyCM2Rn9D70WBDYSPHbFXAviSPFSzeMXyHc",
+            authDomain: "knowercloud.firebaseapp.com",
+            projectId: "knowercloud",
+            storageBucket: "knowercloud.firebasestorage.app",
+            messagingSenderId: "912686271635",
+            appId: "1:912686271635:web:cc63bab2cd2040bea05166",
+            measurementId: "G-CX6TZLNR7H"
+          };
+        
+          // Initialize Firebase
+          const app = initializeApp(firebaseConfig);
+          const analytics = getAnalytics(app);
+    </script>
     </body>
 </html>
