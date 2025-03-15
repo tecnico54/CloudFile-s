@@ -55,7 +55,13 @@
                 getDownloadURL(snapshot.ref).then((downloadURL) => {
                     console.log('Archivo disponible en:', downloadURL);
                     //Mostrar el enlace de descarga
-                    document.getElementById(`btnDescargar-${fileName}`).onclick = () => {
+                    document.getElementById(`btnDescargar-1`).onclick = () => {
+                        window.open(downloadURL, '_blank');
+                    };
+                    document.getElementById(`btnDescargar-2`).onclick = () => {
+                        window.open(downloadURL, '_blank');
+                    };
+                    document.getElementById(`btnDescargar-3`).onclick = () => {
                         window.open(downloadURL, '_blank');
                     };
                 });
