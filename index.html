@@ -6,88 +6,30 @@
         <meta name="author" content="Knower-Tec">
         <link rel="shortcut icon" href="Icon/Pc-Knower.png">
         <link rel="stylesheet" type="text/css" href="CSS/Nube.css">
+        <script src="https://apis.google.com/js/api.js" onload="handleClientLoad()"></script>
         <title>CloudFile's</title>
     </head>
     <body>
         <div class="Contenedor">
             <h1 class="Contenedor__Titulo-1">Guardar Trabajos</h1>
+                <!--Estado de subida-->
+                <div id="uploadStatus"></div>
                 <!-- Campo para subir -->
-                <p><b>Trabajo 1:</b></p>
                 <input type="file" id="fileInput-1" class="Contenedor__Subir-1" />
-                <p><b>Trabajo 2:</b></p>
+                <button onclick="subirArchivo('fileInput-1')" Trabajo>Trabajo 1</button>
                 <input type="file" id="fileInput-2" class="Contenedor__Subir-2" />
-                <p><b>Trabajo 3:</b></p>
+                <button onclick="subirArchivo('fileInput-2')" Trabajo>Trabajo 2</button>
                 <input type="file" id="fileInput-3" class="Contenedor__Subir-3" />
+                <button onclick="subirArchivo('fileInput-3')" Trabajo>Trabajo 3</button>
             <h2 class="Contenedor__Titulo-2">Descargar:</h2>
                 <!--Botones para descargar-->
                 <button id="btnDescargar-1" class="Descargar">Descarga 1</button>
                 <button id="btnDescargar-2" class="Descargar">Descarga 2</button>
                 <button id="btnDescargar-3" class="Descargar">Descarga 3</button>
             </div>
-        <script src="JavaScript/Nube.js"></script>
-        <!--Conexión con FireBase-->
-        <script type="module">
-        //Importar las funciones necesarias desde los SDK de Firebase
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-analytics.js";
-        import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-storage.js";
-        //Configuración de Firebase
-        const firebaseConfig = {
-            apiKey: "AIzaSyCM2Rn9D70WBDYSPHbFXAviSPFSzeMXyHc",
-            authDomain: "knowercloud.firebaseapp.com",
-            projectId: "knowercloud",
-            storageBucket: "knowercloud.firebasestorage.app",
-            messagingSenderId: "912686271635",
-            appId: "1:912686271635:web:cc63bab2cd2040bea05166",
-            measurementId: "G-CX6TZLNR7H"
-        };
-        //Inicializar Firebase
-        const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
-        //Obtener la referencia de Firebase Storage
-        const storage = getStorage(app);
-        //Función para subir archivos
-        function uploadFile(file, fileName) {
-            const storageRef = ref(storage, 'files/' + fileName);
-            uploadBytes(storageRef, file).then((snapshot) => {
-                console.log('Archivo cargado exitosamente:', snapshot);
-                //Obtener URL de descarga del archivo cargado
-                getDownloadURL(snapshot.ref).then((downloadURL) => {
-                    console.log('Archivo disponible en:', downloadURL);
-                    //Mostrar el enlace de descarga
-                    document.getElementById(`btnDescargar-1`).onclick = () => {
-                        window.open(downloadURL, '_blank');
-                    };
-                    document.getElementById(`btnDescargar-2`).onclick = () => {
-                        window.open(downloadURL, '_blank');
-                    };
-                    document.getElementById(`btnDescargar-3`).onclick = () => {
-                        window.open(downloadURL, '_blank');
-                    };
-                });
-            }).catch((error) => {
-                console.error('Error al cargar el archivo:', error);
-            });
-        }
-        //Asignar eventos de subida de archivos
-        document.getElementById('fileInput-1').addEventListener('change', (event) => {
-            const file = event.target.files[0];
-            if(file){
-                uploadFile(file, '1');
-            }
-        });
-        document.getElementById('fileInput-2').addEventListener('change', (event) => {
-            const file = event.target.files[0];
-            if(file){
-                uploadFile(file, '2');
-            }
-        });
-        document.getElementById('fileInput-3').addEventListener('change', (event) => {
-            const file = event.target.files[0];
-            if (file) {
-                uploadFile(file, '3');
-            }
-        });
-    </script>
+            <script src="JavaScript/Cliente.js"></script>
+            <script src="JavaScript/Nube.js"></script>
+            <script src="JavaScript/Subir.js"></script>
+            <script src="JavaScript/Servidor.js"></script>
     </body>
 </html>
