@@ -1,5 +1,5 @@
 // Definir credenciales de Google Cloud
-const CLIENT_ID = '912686271635-i10kugum31bvcbftv7n87ifi8o8gtoh5.apps.googleusercontent.com';
+const CLIENT_ID = '912686271635-p667k06j46kqgfqu5bg5stfhq09t53bj.apps.googleusercontent.com';
 const API_KEY = 'AIzaSyCM2Rn9D70WBDYSPHbFXAviSPFSzeMXyHc';
 const SCOPES = 'https://www.googleapis.com/auth/drive.file';
 // Cargar la API de Google y autenticar al usuario
@@ -12,7 +12,7 @@ function handleClientLoad() {
 function initClient() {
     gapi.client.init({
         apiKey: 'AIzaSyCM2Rn9D70WBDYSPHbFXAviSPFSzeMXyHc',
-        clientId: '912686271635-i10kugum31bvcbftv7n87ifi8o8gtoh5.apps.googleusercontent.com',
+        clientId: '912686271635-p667k06j46kqgfqu5bg5stfhq09t53bj.apps.googleusercontent.com',
         scope: SCOPES,
         discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"]
     }).then(() => {
