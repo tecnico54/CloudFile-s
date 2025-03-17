@@ -1,4 +1,4 @@
-function subirArchivo(inputId){
+function subirArchivo(inputId) {
     const fileInput = document.getElementById(inputId);
     if (!fileInput || !fileInput.files.length){
         alert("Selecciona un archivo primero.");
@@ -31,6 +31,7 @@ function subirArchivo(inputId){
     const uploadStatus = document.getElementById("uploadStatus");
     uploadStatus.innerText = "Subiendo archivo...";
     uploadStatus.style.color = "blue";
+    //Preparar metadata y FormData para la subida
     const metadata = {
         name: file.name,
         mimeType: file.type
@@ -38,6 +39,7 @@ function subirArchivo(inputId){
     const formData = new FormData();
     formData.append("metadata", new Blob([JSON.stringify(metadata)], { type: "application/json" }));
     formData.append("file", file);
+    //Subida del archivo usando la API de Google Drive
     fetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart', {
         method: 'POST',
         headers: {
@@ -53,7 +55,7 @@ function subirArchivo(inputId){
             uploadStatus.style.color = "green";
             alert("El archivo se subió con éxito a Google Drive.");
         } else {
-            console.error("Error en la respuesta de la API. No se recibió un ID de archivo.");
+            console.error("Error en la respuesta de la API. No se recibió un ID de archivo:", data);
             uploadStatus.innerText = "Error al subir el archivo.";
             uploadStatus.style.color = "red";
         }
