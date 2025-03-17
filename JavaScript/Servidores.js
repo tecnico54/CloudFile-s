@@ -1,18 +1,18 @@
-//Definir credenciales de Google Cloud
+// Definir credenciales de Google Cloud
 const CLIENT_ID = '912686271635-i10kugum31bvcbftv7n87ifi8o8gtoh5.apps.googleusercontent.com';
 const API_KEY = 'AIzaSyCM2Rn9D70WBDYSPHbFXAviSPFSzeMXyHc';
 const SCOPES = 'https://www.googleapis.com/auth/drive.file';
-//Cargar la API de Google y autenticar al usuario
+// Cargar la API de Google y autenticar al usuario
 window.onload = function (){
     handleClientLoad();
 };
-function handleClientLoad(){
+function handleClientLoad() {
     gapi.load('client:auth2', initClient);
 }
-function initClient(){
+function initClient() {
     gapi.client.init({
-        apiKey: API_KEY,
-        clientId: CLIENT_ID,
+        apiKey: 'AIzaSyCM2Rn9D70WBDYSPHbFXAviSPFSzeMXyHc',
+        clientId: '912686271635-i10kugum31bvcbftv7n87ifi8o8gtoh5.apps.googleusercontent.com',
         scope: SCOPES,
         discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"]
     }).then(() => {
@@ -23,12 +23,15 @@ function initClient(){
         console.error("Error al cargar la API de Google", error);
     });
 }
-function updateSigninStatus(isSignedIn){
-    if (isSignedIn){
+function updateSigninStatus(isSignedIn) {
+    console.log("Estado de autenticación cambiado: ", isSignedIn);
+    if (isSignedIn) {
         console.log("Usuario autenticado");
     } else {
         console.log("Usuario no autenticado. Pidiendo inicio de sesión...");
-        gapi.auth2.getAuthInstance().signIn().catch(error => {
+        gapi.auth2.getAuthInstance().signIn().then(() => {
+            console.log("Usuario autenticado después de iniciar sesión");
+        }).catch(error => {
             console.error("Error al iniciar sesión:", error);
         });
     }
@@ -36,21 +39,22 @@ function updateSigninStatus(isSignedIn){
 //Verificación de autenticación
 function checkAuth() {
     const authInstance = gapi.auth2.getAuthInstance();
-    if (!authInstance || !authInstance.isSignedIn.get()){
+    if (!authInstance || !authInstance.isSignedIn.get()) {
+        console.log("No autenticado. Pidiendo inicio de sesión...");
         alert("Por favor, inicia sesión para subir archivos.");
         return false;
     }
+    console.log("Usuario autenticado: ", authInstance.currentUser.get().getBasicProfile().getName());
     return true;
 }
 //Función para subir archivo
-function subirArchivo(inputId){
+function subirArchivo(inputId) {
     const fileInput = document.getElementById(inputId);
-    if (!fileInput || !fileInput.files.length){
+    if (!fileInput || !fileInput.files.length) {
         alert("Selecciona un archivo primero.");
         return;
     }
     const file = fileInput.files[0];
-
     if (!checkAuth()) {
         return;
     }
