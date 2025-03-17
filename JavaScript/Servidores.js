@@ -17,34 +17,35 @@ function initClient() {
         discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"]
     }).then(() => {
         console.log("Google API cargada");
-        gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+        gapi.auth2.getAuthInstance()?.isSignedIn?.listen(updateSigninStatus);
         updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
     }).catch((error) => {
         console.error("Error al cargar la API de Google", error);
     });
 }
-function updateSigninStatus(isSignedIn) {
-    console.log("Estado de autenticación cambiado: ", isSignedIn);
-    if (isSignedIn) {
+function updateSigninStatus(isSignedIn){
+    if (isSignedIn){
         console.log("Usuario autenticado");
     } else {
-        console.log("Usuario no autenticado. Pidiendo inicio de sesión...");
+        console.log("Solicitando autenticación...");
         gapi.auth2.getAuthInstance().signIn().then(() => {
-            console.log("Usuario autenticado después de iniciar sesión");
+            console.log("Autenticado correctamente");
+            location.reload(); //Recargar para asegurar sesión activa
         }).catch(error => {
             console.error("Error al iniciar sesión:", error);
         });
     }
 }
 //Verificación de autenticación
-function checkAuth() {
+function checkAuth(){
     const authInstance = gapi.auth2.getAuthInstance();
-    if (!authInstance || !authInstance.isSignedIn.get()) {
+    if (!authInstance || !authInstance.isSignedIn.get()){
         console.log("No autenticado. Pidiendo inicio de sesión...");
         alert("Por favor, inicia sesión para subir archivos.");
         return false;
     }
-    console.log("Usuario autenticado: ", authInstance.currentUser.get().getBasicProfile().getName());
+    const user = authInstance.currentUser.get();
+    console.log("Token de autenticación:", user.getAuthResponse().access_token);
     return true;
 }
 //Función para subir archivo
